@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { toast } from 'react-toastify';
-import { serverUrl } from '../../config/api';
+import { serverUrl, baseUrl } from '../../config/api';
 import axios from 'axios';
 import QRCodeModal from '../QRCode/QRCodeModal';
 import { Copy, QrCode, Trash2, ExternalLink, TrendingUp, Link2 } from 'lucide-react';
@@ -23,7 +23,7 @@ const DataTable = (props) => {
 
     const copyToClipboard = async (url) => {
         try {
-            const fullUrl = `${serverUrl.replace('/api', '')}/r/${url}`;
+            const fullUrl = `${baseUrl}/r/${url}`;
             await navigator.clipboard.writeText(fullUrl);
             toast.success(`Copied: ${url}`);
         } catch (error) {
@@ -117,7 +117,7 @@ const DataTable = (props) => {
                                                 </code>
                                             </div>
                                             <a
-                                                href={`http://localhost:5001/r/${item.shortUrl}`}
+                                                href={`${baseUrl}/r/${item.shortUrl}`}
                                                 target="_blank"
                                                 rel="noreferrer"
                                                 className='text-slate-400 hover:text-purple-400 transition-colors'

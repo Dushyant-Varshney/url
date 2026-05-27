@@ -8,7 +8,7 @@ const Footer = () => {
       <div className='container mx-auto px-4 py-8'>
         <div className='flex items-center justify-center'>
           <p className='text-slate-500 text-sm'>
-            Â© {currentYear} URL Shortener. All rights reserved.
+            © {currentYear} URL Shortener. All rights reserved.
           </p>
         </div>
       </div>

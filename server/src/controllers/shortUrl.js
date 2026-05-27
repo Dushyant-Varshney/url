@@ -1,6 +1,8 @@
 const { urlModel } = require("../model/shortUrl");
-const { getFromCache, setInCache, deleteFromCache } = require("../utils/cacheManager");
+const { setInCache, deleteFromCache } = require("../utils/cacheManager");
 const { generateQRCodeDataUrl } = require("../utils/qrCodeGenerator");
+
+const BASE_URL = process.env.BASE_URL || "http://localhost:5001";
 
 /**
  * Create a new shortened URL for authenticated user
@@ -32,7 +34,7 @@ const createUrl = async (
       // URL already exists for this user, generate QR code and return
       try {
         const qrCode = await generateQRCodeDataUrl(
-          `http://localhost:5001/r/${urlFound.shortUrl}`
+          `${BASE_URL}/r/${urlFound.shortUrl}`
         );
         const response = {
           ...urlFound.toObject(),
@@ -62,7 +64,7 @@ const createUrl = async (
     // Generate QR code
     try {
       const qrCode = await generateQRCodeDataUrl(
-        `http://localhost:5001/r/${shortUrl.shortUrl}`
+        `${BASE_URL}/r/${shortUrl.shortUrl}`
       );
       const response = {
         ...shortUrl.toObject(),
@@ -115,7 +117,7 @@ const getAllUrl = async (
       shortUrls.map(async (item) => {
         try {
           const qrCode = await generateQRCodeDataUrl(
-            `http://localhost:5001/r/${item.shortUrl}`
+            `${BASE_URL}/r/${item.shortUrl}`
           );
           return {
             ...item.toObject(),
@@ -171,7 +173,7 @@ const getUrl = async (
     // Generate QR code
     try {
       const qrCode = await generateQRCodeDataUrl(
-        `http://localhost:5001/r/${shortUrl.shortUrl}`
+        `${BASE_URL}/r/${shortUrl.shortUrl}`
       );
       const response = {
         ...shortUrl.toObject(),
@@ -258,7 +260,7 @@ const getQRCode = async (
     }
 
     const qrCode = await generateQRCodeDataUrl(
-      `http://localhost:5001/r/${urlDoc.shortUrl}`
+      `${BASE_URL}/r/${urlDoc.shortUrl}`
     );
 
     res.status(200).json({ qrCode, shortUrl: urlDoc.shortUrl });
