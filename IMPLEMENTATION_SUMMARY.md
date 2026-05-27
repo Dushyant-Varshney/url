@@ -3,16 +3,16 @@
 ## Overview
 
 This is an enhanced full-stack URL shortener application built with:
-- **Backend**: Express.js, MongoDB, Redis (optional), TypeScript
-- **Frontend**: React, Vite, Tailwind CSS, TypeScript
+- **Backend**: Express.js, MongoDB, Redis (optional), JavaScript
+- **Frontend**: React, Vite, Tailwind CSS, JavaScript
 - **Features**: URL shortening, click tracking, QR code generation, Redis caching
 
 ## What Was Added
 
 ### 1. Redis Caching ✅
 - **Files**: 
-  - `server-app/src/config/redisConfig.ts` - Redis connection and initialization
-  - `server-app/src/utils/cacheManager.ts` - Cache management utilities
+  - `server/src/config/redisConfig.js` - Redis connection and initialization
+  - `server/src/utils/cacheManager.js` - Cache management utilities
   
 - **Features**:
   - Cache short URL → full URL mappings
@@ -25,8 +25,8 @@ This is an enhanced full-stack URL shortener application built with:
 
 ### 2. QR Code Generation ✅
 - **Files**:
-  - `server-app/src/utils/qrCodeGenerator.ts` - QR code generation utility
-  - `client-app/url-shortener-app/src/components/QRCode/QRCodeModal.tsx` - QR display modal
+  - `server/src/utils/qrCodeGenerator.js` - QR code generation utility
+  - `client/src/components/QRCode/QRCodeModal.jsx` - QR display modal
   
 - **Features**:
   - QR codes generated dynamically (no database storage needed)
@@ -42,7 +42,7 @@ This is an enhanced full-stack URL shortener application built with:
   - `Footer` - Rich footer with links and copyright
   - `FormContainer` - Gradient background, modern form with validation and loading states
   - `DataTable` - Responsive table for desktop and card layout for mobile
-  - `App.tsx` - Integrated toast notifications
+  - `App.jsx` - Integrated toast notifications
   
 - **Features**:
   - Toast notifications for success/error/info messages (react-toastify)
@@ -57,7 +57,7 @@ This is an enhanced full-stack URL shortener application built with:
   - Success/error feedback for all operations
 
 ### 4. Better Code Quality ✅
-- Type-safe throughout (full TypeScript)
+- Type-safe throughout (full JavaScript)
 - Improved error handling with try-catch
 - Graceful degradation (Redis optional)
 - Clean separation of concerns
@@ -76,7 +76,7 @@ This is an enhanced full-stack URL shortener application built with:
 ### Backend Setup
 
 ```bash
-cd server-app
+cd server
 npm install
 ```
 
@@ -102,7 +102,7 @@ The server will start on `http://localhost:5001`
 ### Frontend Setup
 
 ```bash
-cd client-app/url-shortener-app
+cd client
 npm install
 ```
 
@@ -225,7 +225,7 @@ GET /r/:shortUrl
 - **Mongoose** - ODM
 - **Redis** - Caching layer (optional)
 - **qrcode** - QR code generation
-- **TypeScript** - Type safety
+- **JavaScript** - Type safety
 - **CORS** - Cross-origin requests
 - **dotenv** - Environment variables
 
@@ -236,7 +236,7 @@ GET /r/:shortUrl
 - **Axios** - HTTP client
 - **React Router** - Routing (preinstalled)
 - **React Toastify** - Notifications
-- **TypeScript** - Type safety
+- **JavaScript** - Type safety
 
 ## Performance Benefits
 
@@ -265,7 +265,7 @@ GET /r/:shortUrl
 
 ## Development Notes
 
-- All code is fully type-safe (TypeScript)
+- All code is fully runtime-safe (JavaScript)
 - Console logs for debugging (use browser DevTools)
 - Server logs show cache hits/misses
 - Graceful error handling throughout
@@ -302,7 +302,7 @@ GET /r/:shortUrl
 
 ### CORS errors
 - Ensure frontend is on `http://localhost:3000`
-- Check CORS configuration in `server.ts`
+- Check CORS configuration in `server.js`
 - Backend expects requests from port 3000 only
 
 ## License

@@ -12,7 +12,7 @@
 
 ```bash
 # Navigate to backend
-cd server-app
+cd server
 
 # Install dependencies
 npm install
@@ -29,7 +29,7 @@ Backend will run on `http://localhost:5001`
 
 ```bash
 # Navigate to frontend
-cd client-app/url-shortener-app
+cd client
 
 # Install dependencies
 npm install
@@ -236,7 +236,7 @@ VITE_API_URL=http://localhost:5001
 ### Backend won't start
 ```
 Error: "Cannot find module 'bcrypt'"
-Solution: Run npm install again in server-app directory
+Solution: Run npm install again in server directory
 ```
 
 ### "Unauthorized" errors
@@ -245,7 +245,7 @@ Issue: Frontend can't access protected endpoints
 Solution: 
 1. Check token in browser console: localStorage.getItem('authToken')
 2. Verify backend is running on 5001
-3. Check CORS configuration in server.ts
+3. Check CORS configuration in server.js
 ```
 
 ### Frontend shows "Loading..." forever
@@ -270,7 +270,7 @@ Solution:
 ```
 Issue: "Access to XMLHttpRequest has been blocked by CORS policy"
 Solution:
-1. Verify CORS is enabled in server.ts
+1. Verify CORS is enabled in server.js
 2. Check frontend URL matches CORS origins
 3. Verify Authorization header is allowed
 ```
@@ -280,25 +280,25 @@ Solution:
 ## 📁 File Changes Summary
 
 ### New Files Created
-- `server-app/src/model/user.ts` - User schema
-- `server-app/src/controllers/auth.ts` - Auth logic
-- `server-app/src/routes/auth.ts` - Auth routes
-- `server-app/src/middleware/authMiddleware.ts` - JWT verification
-- `client-app/.../src/context/AuthContext.tsx` - Auth state
-- `client-app/.../src/pages/Login.tsx` - Login page
-- `client-app/.../src/pages/Register.tsx` - Register page
-- `client-app/.../src/utils/axiosConfig.ts` - Axios setup
-- `client-app/.../src/components/ProtectedRoute/...` - Route guard
+- `server/src/model/user.js` - User schema
+- `server/src/controllers/auth.js` - Auth logic
+- `server/src/routes/auth.js` - Auth routes
+- `server/src/middleware/authMiddleware.js` - JWT verification
+- `client/src/context/AuthContext.jsx` - Auth state
+- `client/src/pages/Login.jsx` - Login page
+- `client/src/pages/Register.jsx` - Register page
+- `client/src/utils/axiosConfig.js` - Axios setup
+- `client/src/components/ProtectedRoute/...` - Route guard
 
 ### Updated Files
-- `server-app/src/model/shortUrl.ts` - Added user reference
-- `server-app/src/controllers/shortUrl.ts` - Added auth checks
-- `server-app/src/routes/shortUrl.ts` - Added auth middleware
-- `server-app/src/server.ts` - Added auth routes
-- `server-app/package.json` - Added bcrypt, jsonwebtoken
-- `client-app/.../src/App.tsx` - Added routing and auth
-- `client-app/.../src/components/Header/Header.tsx` - Added user menu
-- `client-app/.../package.json` - No changes (dependencies already present)
+- `server/src/model/shortUrl.js` - Added user reference
+- `server/src/controllers/shortUrl.js` - Added auth checks
+- `server/src/routes/shortUrl.js` - Added auth middleware
+- `server/src/server.js` - Added auth routes
+- `server/package.json` - Added bcrypt, jsonwebtoken
+- `client/src/App.jsx` - Added routing and auth
+- `client/src/components/Header/Header.jsx` - Added user menu
+- `client/package.json` - No changes (dependencies already present)
 
 ---
 

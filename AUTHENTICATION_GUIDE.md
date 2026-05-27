@@ -8,7 +8,7 @@ This document describes the complete authentication and user-based URL managemen
 
 ### Backend (Node.js + Express + MongoDB)
 
-#### 1. User Model (`server-app/src/model/user.ts`)
+#### 1. User Model (`server/src/model/user.js`)
 - **name**: User's full name
 - **email**: Unique email address
 - **password**: Hashed using bcrypt (10 salt rounds)
@@ -17,12 +17,12 @@ This document describes the complete authentication and user-based URL managemen
 Methods:
 - `comparePassword()`: Securely compare entered password with hashed password
 
-#### 2. Updated URL Model (`server-app/src/model/shortUrl.ts`)
+#### 2. Updated URL Model (`server/src/model/shortUrl.js`)
 - **user**: ObjectId reference to User model (required)
 - All URLs now belong to a specific user
 - Users can only access their own URLs
 
-#### 3. Authentication Routes (`server-app/src/routes/auth.ts`)
+#### 3. Authentication Routes (`server/src/routes/auth.js`)
 
 **POST /api/auth/register**
 - Register a new user
@@ -41,13 +41,13 @@ Methods:
 - Headers: `Authorization: Bearer <token>`
 - Returns: `{ user }`
 
-#### 4. Auth Middleware (`server-app/src/middleware/authMiddleware.ts`)
+#### 4. Auth Middleware (`server/src/middleware/authMiddleware.js`)
 - Verifies JWT token from Authorization header
 - Extracts user ID and attaches to request object
 - Rejects expired or invalid tokens
 - Error handling for token validation failures
 
-#### 5. Protected URL Routes (`server-app/src/routes/shortUrl.ts`)
+#### 5. Protected URL Routes (`server/src/routes/shortUrl.js`)
 
 All URL endpoints now require authentication:
 
@@ -76,9 +76,9 @@ All URL endpoints now require authentication:
 - Anyone with short URL can access it
 - Click counting still works
 
-### Frontend (React + TypeScript)
+### Frontend (React + JavaScript)
 
-#### 1. Auth Context (`src/context/AuthContext.tsx`)
+#### 1. Auth Context (`src/context/AuthContext.jsx`)
 Provides authentication state and methods:
 - `user`: Current user object
 - `token`: JWT token stored in localStorage
@@ -90,17 +90,17 @@ Provides authentication state and methods:
   - `logout()`: Clear auth state
   - `checkAuth()`: Verify token validity
 
-#### 2. Axios Interceptor (`src/utils/axiosConfig.ts`)
+#### 2. Axios Interceptor (`src/utils/axiosConfig.js`)
 - Automatically attaches JWT token to all requests
 - Handles 401 errors by redirecting to login
 - Token stored in localStorage persists across page refreshes
 
-#### 3. Protected Route (`src/components/ProtectedRoute/ProtectedRoute.tsx`)
+#### 3. Protected Route (`src/components/ProtectedRoute/ProtectedRoute.jsx`)
 - Guards routes requiring authentication
 - Redirects unauthenticated users to login
 - Shows loading state while checking auth
 
-#### 4. Login Page (`src/pages/Login.tsx`)
+#### 4. Login Page (`src/pages/Login.jsx`)
 - Beautiful glassmorphic UI matching design system
 - Email validation
 - Password validation
@@ -108,7 +108,7 @@ Provides authentication state and methods:
 - Link to register page
 - Toast notifications for errors
 
-#### 5. Register Page (`src/pages/Register.tsx`)
+#### 5. Register Page (`src/pages/Register.jsx`)
 - User registration form
 - Fields: name, email, password, confirm password
 - Validation:
@@ -119,14 +119,14 @@ Provides authentication state and methods:
 - Toast notifications
 - Link to login page
 
-#### 6. Updated Header (`src/components/Header/Header.tsx`)
+#### 6. Updated Header (`src/components/Header/Header.jsx`)
 - Shows user's name and online status indicator
 - Dropdown menu with:
   - User name and email
   - Logout button
 - Styled with glassmorphism design
 
-#### 7. Updated App Routes (`src/App.tsx`)
+#### 7. Updated App Routes (`src/App.jsx`)
 - BrowserRouter setup
 - AuthProvider wrapper
 - Route structure:
@@ -286,7 +286,7 @@ Provides authentication state and methods:
 
 1. **Install Dependencies**
    ```bash
-   cd server-app
+   cd server
    npm install
    ```
 
@@ -306,7 +306,7 @@ Provides authentication state and methods:
 
 1. **Install Dependencies**
    ```bash
-   cd client-app/url-shortener-app
+   cd client
    npm install
    ```
 
@@ -424,37 +424,37 @@ Provides authentication state and methods:
 ## File Structure
 
 ```
-server-app/
+server/
 ├── src/
 │   ├── controllers/
-│   │   ├── auth.ts (NEW)
-│   │   └── shortUrl.ts (UPDATED)
+│   │   ├── auth.js (NEW)
+│   │   └── shortUrl.js (UPDATED)
 │   ├── middleware/
-│   │   └── authMiddleware.ts (NEW)
+│   │   └── authMiddleware.js (NEW)
 │   ├── model/
-│   │   ├── user.ts (NEW)
-│   │   └── shortUrl.ts (UPDATED)
+│   │   ├── user.js (NEW)
+│   │   └── shortUrl.js (UPDATED)
 │   ├── routes/
-│   │   ├── auth.ts (NEW)
-│   │   └── shortUrl.ts (UPDATED)
-│   └── server.ts (UPDATED)
+│   │   ├── auth.js (NEW)
+│   │   └── shortUrl.js (UPDATED)
+│   └── server.js (UPDATED)
 ├── .env (UPDATED)
 └── package.json (UPDATED)
 
-client-app/url-shortener-app/
+client/
 ├── src/
 │   ├── context/
-│   │   └── AuthContext.tsx (NEW)
+│   │   └── AuthContext.jsx (NEW)
 │   ├── pages/
-│   │   ├── Login.tsx (NEW)
-│   │   └── Register.tsx (NEW)
+│   │   ├── Login.jsx (NEW)
+│   │   └── Register.jsx (NEW)
 │   ├── components/
 │   │   ├── Header/ (UPDATED)
 │   │   ├── ProtectedRoute/ (NEW)
 │   │   └── (others unchanged)
 │   ├── utils/
-│   │   └── axiosConfig.ts (NEW)
-│   └── App.tsx (UPDATED)
+│   │   └── axiosConfig.js (NEW)
+│   └── App.jsx (UPDATED)
 ├── .env (UPDATED)
 └── package.json
 ```
@@ -474,7 +474,7 @@ client-app/url-shortener-app/
 
 ### CORS Error
 - Backend CORS not configured for frontend URL
-- Update CORS origins in server.ts
+- Update CORS origins in server.js
 
 ### User Can See Other Users' URLs
 - Check URL queries filter by user ID
